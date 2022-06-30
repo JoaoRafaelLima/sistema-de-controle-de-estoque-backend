@@ -14,6 +14,6 @@ app.register_blueprint(grupo_service)
 
 @app.route('/')
 def home():
-    return ""
+    return "<h1>Sistema de controle de estoque v0.1</h1>"
 app.run()
 
