@@ -1,5 +1,4 @@
 from flask import Flask, Blueprint, Response
-import os
 from service.produtoService import produto_service
 from service.usuarioService import usuario_service
 from service.grupoService import grupo_service
