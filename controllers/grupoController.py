@@ -1,7 +1,7 @@
 from repository.grupoRepository import GrupoRepository
 from models.grupoModel import GrupoModel
 from models.produtoModel import ProdutoModel
-from exceptions.grupoExceptions import GrupoInexistente, QuantidadeInsuficenteParaMovimentacao
+from exceptions.grupoExceptions import GrupoInexistente, QuantidadeInsuficenteParaMovimentacao, GrupoOuProdutoNaoEncontrado
 import json
 
 
@@ -72,4 +72,12 @@ class GrupoController:
             return (json.dumps({"Error": str(error)}), 400)
         
         except GrupoInexistente as error:
+            return (json.dumps({"Error": str(error)}), 400)
+    
+    def reporProduto(self, data):
+        try:
+            self.grupoRepository.reporProduto(data["grupo_id"], data["produto_id"], data["quantidade"])
+            return (json.dumps({"Message": "Reposição feita com sucesso!"}), 200)
+        
+        except GrupoOuProdutoNaoEncontrado as error:
             return (json.dumps({"Error": str(error)}), 400)
