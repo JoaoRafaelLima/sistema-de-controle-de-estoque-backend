@@ -43,6 +43,7 @@ def movimentar(args):
     return  make_response(response, status)
 
 @grupo_service.route("/grupo/reposicao-de-produto", methods=["PUT"])
-def reporProduto():
+@login_required
+def reporProduto(args):
     response, status = grupoController.reporProduto(request.json)
     return  make_response(response, status)
