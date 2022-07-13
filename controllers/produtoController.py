@@ -1,5 +1,6 @@
 import sqlite3
 from exceptions.produtoExceptions import ProdutoNaoEncontrado
+from exceptions.grupoExceptions import GrupoOuProdutoNaoEncontrado
 from repository.produtoRepository import ProdutoRepository
 from models.produtoModel import ProdutoModel
 import json
@@ -58,5 +59,13 @@ class ProdutoController:
             return (json.dumps({"Message": "Produto deletado com sucesso"}), 200)
         except ProdutoNaoEncontrado:
             return (json.dumps({"Error": "O produto informado não está cadastrado"}), 500)
+    
+    def reporProduto(self, data):
+        try:
+            self.produtoRepository.reporProduto(data["grupo_id"], data["produto_id"], data["quantidade"])
+            return (json.dumps({"Message": "Reposição feita com sucesso!"}), 200)
+        
+        except GrupoOuProdutoNaoEncontrado as error:
+            return (json.dumps({"Error": str(error)}), 400)
 
         

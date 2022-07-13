@@ -35,3 +35,9 @@ def atualizarProduto(args):
 def deletarProduto(args, id):
     response, status = produtoController.deletarProduto(id)
     return make_response(response, status)
+
+@produto_service.route("/produto/reposicao", methods=["PUT"])
+@login_required
+def reporProduto(args):
+    response, status = produtoController.reporProduto(request.json)
+    return  make_response(response, status)

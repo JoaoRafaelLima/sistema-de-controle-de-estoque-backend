@@ -107,12 +107,3 @@ class GrupoRepository:
             self.conexao.commit()
             return True
 
-    def reporProduto(self, grupo_id, produto_id, quantidade):
-        #query que verifica se há um registro que relaciona o produto solicitado com o grupo 2
-        query = "SELECT * FROM grupo_produto WHERE grupo_id = ? AND produto_id = ?"
-        self.cursor.execute(query, (grupo_id, produto_id))
-        if self.cursor.fetchone() != None:
-            query2 = "UPDATE grupo_produto SET quantidade = ? WHERE grupo_id = ? and produto_id = ?"
-            self.cursor.execute(query2, (quantidade, grupo_id, produto_id))
-        else:
-            raise GrupoOuProdutoNaoEncontrado()
