@@ -1,0 +1,2 @@
+- Concertar a função de repor produto, pois, está somente alterando o valor da quantidade e não 
+atualizando, somando o valor que já está no banco com oque vai ser adicionando
