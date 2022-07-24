@@ -1,6 +1,7 @@
 from functools import wraps
 from flask import request
 import jwt
+import os
 
 def login_required(f):
     @wraps(f)
@@ -9,7 +10,7 @@ def login_required(f):
         if request.headers.get("authorization"):
             token = request.headers["authorization"]
             try:
-                dec = jwt.decode(token, "teste", algorithms=["HS256"])
+                dec = jwt.decode(token, os.getenv("SECRET_KEY"), algorithms=["HS256"])
                 return f(dec, *args, **kwargs)
             except jwt.ExpiredSignatureError:
                 return {"Error": "Sessão expirada"}

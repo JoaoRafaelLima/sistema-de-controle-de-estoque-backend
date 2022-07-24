@@ -7,6 +7,7 @@ from hashlib import sha256
 import json
 import jwt
 import datetime
+import os
 
 class UsuarioController:
 
@@ -63,9 +64,9 @@ class UsuarioController:
             if usuario[3] == sha256(data["senha"].encode()).hexdigest():
                 payload = {
                     "id": usuario[0],
-                    "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=10)
+                    "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=5)
                 }
-                token = jwt.encode(payload, "teste", algorithm="HS256")
+                token = jwt.encode(payload, os.getenv("SECRET_KEY"), algorithm="HS256")
                 return (json.dumps({"Token": token}), 200)
             else:
                 return (json.dumps({"Erro": "Senha incorreta"}), 400)
